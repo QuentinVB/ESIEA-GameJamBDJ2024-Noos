@@ -8,6 +8,8 @@ export function displayWithDelay(target,content,speed=100)
                     clearInterval(interval);
                     currentText.length--;
                     target.textContent=currentText.join('');
+                    const event = new CustomEvent("display",{detail:{msg:"ended"}});
+                    document.dispatchEvent(event);
                     return;
                 };
                 currentText[currentText.length-1]= content[idx];

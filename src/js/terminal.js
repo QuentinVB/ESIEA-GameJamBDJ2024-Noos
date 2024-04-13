@@ -1,7 +1,7 @@
 import { displayWithDelay } from "./textdisplay";
 import { parseCommand } from "./computer_fn";
 
-const command_history = [];
+
 const body = document.getElementById("body");
 
 const terminal = document.getElementById("terminal");
@@ -40,13 +40,20 @@ export function initShell() {
         inputEle.size = inputEle.value.length + 1;
         if (e.keyCode == 13) {
             addRowToTerminal(invite.textContent + inputEle.value);
-            const output = parseCommand(inputEle.value);
-            addRowToTerminal(output.content, output.classes, output.isAnimated);
-            command_history.push(inputEle.value);
-            inputEle.value = "";
-            updateCaretPosition();
-            window.moveTo(0, 0);
-            body.scrollTo(0, 0);
+            try {
+                parseCommand(inputEle.value)
+                    .then(output => {
+                        addRowToTerminal(output.content, output.classes, output.isAnimated);
+
+                        inputEle.value = "";
+                        updateCaretPosition();
+                        window.moveTo(0, 0);
+                        body.scrollTo(0, 0);
+                    })
+
+            } catch (error) {
+                console.error(error)
+            }
 
         }
 

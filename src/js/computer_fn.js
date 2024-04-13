@@ -1,12 +1,39 @@
+const command_history = [];
 
-export function parseCommand(command) {
-    console.log("recieved to interpret: "+command)
-    const comEl = command.split(" ");
+let currentFolder = `/`;
 
+export async function parseCommand(command) {
+    console.log("recieved to interpret: "+command);
+    
     let content = "";
     let classes = [];
     let isAnimated = false;
+    if(command == "") return { content, classes, isAnimated };
+
+    command_history.push(command);
+    const comEl = command.split(" ");
+
     switch (comEl[0]) {
+        case"pwd":
+            content = currentFolder;
+            break;
+        case"cd":
+            //moving to folder
+            if(comEl[1]==="..")
+            {
+                //moving up
+                const folders = currentFolder.split("/");
+                folders.length--;
+                currentFolder = "/"+folders.join("/");
+            }
+            else if(comEl.length>1)
+            {
+                //TODO : check for valid path
+                const path = comEl[1].split("/");
+                currentFolder+=comEl[1];
+            }
+            content = currentFolder;
+            break;
         case "help":
         case "man":
         case "/?":
@@ -18,13 +45,31 @@ export function parseCommand(command) {
             break;
         case "cat":
             if (comEl[1] === "ice.txt") {
-                content = `si tu lis ces lignes, c'est que je suis mort\n ne sois pas triste`
+                content = `InCaseofEmergency : 10/01/1996\n Si tu lis ces lignes, c'est que je suis mort\n J'espère trouver un moyen de continuer.`
                 classes.push("doc");
                 isAnimated = true;
 
                 const event = new CustomEvent("userCmd",{detail:{msg:"fileReaded"}});
                 document.dispatchEvent(event);
 
+            }
+            else if (comEl[1] === "misato.txt") {
+                const response = await fetch("/assets/content/misato_ascii.txt");
+                const data = await response.text();
+            
+                console.log(data);
+                content = data;
+                classes.push("ascii-art");
+                isAnimated=false;
+            }
+            else if (comEl[1] === "misato2.txt") {
+                const response = await fetch("/assets/content/misato2_ascii.txt");
+                const data = await response.text();
+            
+                console.log(data);
+                content = data;
+                classes.push("ascii-art");
+                isAnimated=false;
             }
             else {
                 content = "no file specified"

@@ -1,5 +1,6 @@
 :root {
-  --text-color: lime;
+  --text-color: rgb(156, 180, 156);
+  --ghost-color: lime;
 }
 
 * {

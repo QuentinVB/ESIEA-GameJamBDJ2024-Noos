@@ -12,3 +12,10 @@ https://opengameart.org/content/ui-failed-or-error
 https://opengameart.org/content/deep-system-computer-voice
 
 https://pixabay.com/fr/service/license-summary/
+
+credit ascii
+
+## TODO
+
+gérer la barre de défilement
+scroller le shell

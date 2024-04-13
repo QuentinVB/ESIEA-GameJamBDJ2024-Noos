@@ -19,7 +19,14 @@
   }
   
   .doc {
-    color: white;
+    color: var(--ghost-color);
+  }
+  .ascii-art
+  {
+    font-family: "MS PGothic" ,monospace;
+    font-size: 12pt;
+    line-height: 14pt;
+    transform: scale(0.8);
   }
   .bios {
     color: rgb(173, 173, 173);
