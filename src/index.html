@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--<link rel="styleSheet" href="./css/main.css"/>
+    <link rel="styleSheet" href="./css/glitch.css"/>-->
+</head>
+<body id="body">
+    <div id="terminal">
+        <p class="terminal-row" id="prompt-line">
+            <span class="prompt" id="prompt"></span>
+            <span class="container">
+                <input type="text" id="input" autocomplete="off" />
+                <span class="caret" id="caret"></span>
+            </span>
+        </p>
+    </div>
+    <div id="ghost">
+        <div class="glitch glitch-font glitch-opacity glitch-movement" data-text=""><span></span></div>
+    </div>
+
+    <audio loop src="./sound/Bit Space (loopable).mp3" preload="auto" autoplay></audio>
+</body>
+<script src="./main.js" defer async type="module"></script>
+</html>
