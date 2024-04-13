@@ -1,0 +1,75 @@
+.terminal {
+    width: 100%;
+    cursor: hand auto;
+  }
+  
+  input[type="text"] {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    caret-color: transparent;
+    background: none;
+    max-width: 100%;
+  }
+  
+  p,
+  pre {
+    margin: 0;
+  }
+  
+  .doc {
+    color: white;
+  }
+  .bios {
+    color: rgb(173, 173, 173);
+    font-weight: lighter;
+    font-size: 0.8em;
+  }
+  pre.terminal-row {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .container {
+    position: relative;
+    left:-12px;
+  }
+  #prompt-line{
+  
+  }
+  #prompt
+  {
+  
+  }
+  
+  .caret {
+    position: absolute;
+    left: 0;
+    bottom: -45%;
+    transform: translateY(-50%);
+  
+    height: 1.2rem;
+    width: 0.5rem;
+  
+    opacity: 0;
+    background: var(--text-color);
+    transition: transform 0.2s;
+    animation: blink-animation 0.8s infinite;
+  }
+  
+  @keyframes blink-animation {
+    0%,
+    100% {
+      background-color: transparent;
+    }
+  
+    50% {
+      background-color: var(--text-color);
+    }
+  }
+  
+  .container input:focus ~ .caret {
+    opacity: 1;
+  }
+  
