@@ -57,7 +57,6 @@ export async function parseCommand(command) {
                 const response = await fetch("/assets/content/misato_ascii.txt");
                 const data = await response.text();
             
-                console.log(data);
                 content = data;
                 classes.push("ascii-art");
                 isAnimated=false;
@@ -66,7 +65,6 @@ export async function parseCommand(command) {
                 const response = await fetch("/assets/content/misato2_ascii.txt");
                 const data = await response.text();
             
-                console.log(data);
                 content = data;
                 classes.push("ascii-art");
                 isAnimated=false;

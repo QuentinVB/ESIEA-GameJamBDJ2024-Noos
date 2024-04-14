@@ -9,7 +9,7 @@ const inputEle = document.getElementById('input');
 const promptLine = document.getElementById('prompt-line');
 const invite = document.getElementById('prompt');
 
-export function addRowToTerminal(content, classes = "", isAnimated = false, delay = 100) {
+export function addRowToTerminal(content, classes = "", isAnimated = false, delay = 40) {
     if (content === undefined) return;
     const row = document.createElement("pre");
     row.classList.add("terminal-row");
@@ -24,6 +24,8 @@ export function addRowToTerminal(content, classes = "", isAnimated = false, dela
 }
 
 export function initShell() {
+    const caretEle = document.getElementById('caret');
+
     invite.textContent = ":>";
 
     document.addEventListener("click", () => {
@@ -47,8 +49,8 @@ export function initShell() {
 
                         inputEle.value = "";
                         updateCaretPosition();
-                        window.moveTo(0, 0);
-                        body.scrollTo(0, 0);
+                        //window.scrollTo(0, document.body.scrollTop);
+                        promptLine.scrollIntoView({ behavior: "smooth",block:"center", inline: "nearest"})
                     })
 
             } catch (error) {
@@ -60,7 +62,7 @@ export function initShell() {
     });
 
 
-    const caretEle = document.getElementById('caret');
+    
     const canvasEle = document.createElement('canvas');
     const context = canvasEle.getContext('2d');
     const measureWidth = (text, font) => {

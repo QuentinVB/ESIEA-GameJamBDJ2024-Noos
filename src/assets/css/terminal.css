@@ -1,6 +1,7 @@
 .terminal {
     width: 100%;
-    cursor: hand auto;
+    /*cursor: hand auto;*/
+    margin-bottom:100vh;
   }
   
   input[type="text"] {

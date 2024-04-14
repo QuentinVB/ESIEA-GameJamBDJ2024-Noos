@@ -6,23 +6,75 @@
 * {
   font-family: "Consolas", sans-serif;
   font-weight: bold;
-  color: var(--text-color);
   font-size: 1.1rem;
+  color: var(--text-color);
 }
 
 html {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 body {
   background: rgb(32, 32, 32);
   background-image: url("../img/402107790_STATIC_NOISE_400.gif");
   background-blend-mode: multiply;
+  margin:0;
+  padding: 0;
+
 }
+
 
 
 #ghost {
   position: fixed;
   right: 5%;
   bottom: 5%;
+}
+
+button
+{
+  cursor: pointer;
+}
+
+#screen1.title-screen
+{
+  width: 100%;
+  height: 100vh;
+}
+#screen1.title-screen div.container
+{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color:aqua;
+
+}
+#screen1.title-screen h1
+{
+  font-size: 5rem;
+}
+
+.icon 
+{
+  fill:aqua;
+}
+.icon:hover
+{
+  fill:rgb(153, 255, 255);
+}
+.icon:active
+{
+  fill:rgb(65, 71, 88);
+
+}
+.title button{
+  background: none;
+  border: none;
+}
+#screen1.title-screen p
+{
+  font-size: 0.6rem;
 }
