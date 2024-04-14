@@ -5,6 +5,7 @@ import '/assets/css/glitch.css'
 import '/assets/css/scrollbar.css'
 import ghostRun from "./js/ghost.js";
 import { enterFullScreen } from "./js/textdisplay.js";
+import Computer from "./js/computer.js";
 const glitchSound = new Audio("./assets/sound/electronic-glitch-98287.mp3");
 const backgroundSound = new Audio("./assets/sound/Bit Space (loopable).mp3");
 backgroundSound.loop =true;
@@ -23,15 +24,26 @@ function run() {
         console.log("play");
         if(!DEBUG) enterFullScreen(document.documentElement);
         backgroundSound.play();
-        glitchSound.play();
-        screen1.style.display = "none";
-        screen2.style.display = "block";
-        playScreen2()
+
+        console.log("loading");
+        
+        Computer.LoadComputer("./assets/content/computerA.json")
+        .then(computer=>
+        {
+            glitchSound.play();
+            screen1.style.display = "none";
+            screen2.style.display = "block";
+            playScreen2(computer);
+        })
+        
+
     },false);
 
     ghostRun();
-    function playScreen2()
+
+    function playScreen2(computer)
     {
+        
         if(!DEBUG)
         {
             
@@ -51,13 +63,13 @@ function run() {
             document.addEventListener("display", e => {
                 if (e.detail.msg === "ended") {
         
-                    terminal.initShell()
+                    terminal.initShell(computer)
                 }
             });
         }
         else
         {
-            terminal.initShell()
+            terminal.initShell(computer)
     
         }
     }

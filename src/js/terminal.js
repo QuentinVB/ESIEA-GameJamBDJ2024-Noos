@@ -1,5 +1,4 @@
 import { displayWithDelay } from "./textdisplay";
-import { parseCommand } from "./computer_fn";
 
 
 const body = document.getElementById("body");
@@ -13,7 +12,7 @@ export function addRowToTerminal(content, classes = "", isAnimated = false, dela
     if (content === undefined) return;
     const row = document.createElement("pre");
     row.classList.add("terminal-row");
-    if (classes.length > 0) row.classList.add(classes);
+    if (classes.length > 0) row.classList.add(...classes);
     if (isAnimated) {
         displayWithDelay(row, content, delay)
     }
@@ -23,7 +22,8 @@ export function addRowToTerminal(content, classes = "", isAnimated = false, dela
     promptLine.before(row);
 }
 
-export function initShell() {
+export function initShell(computer) {
+
     const caretEle = document.getElementById('caret');
 
     invite.textContent = ":>";
@@ -43,7 +43,7 @@ export function initShell() {
         if (e.keyCode == 13) {
             addRowToTerminal(invite.textContent + inputEle.value);
             try {
-                parseCommand(inputEle.value)
+                computer.parseCommand(inputEle.value)
                     .then(output => {
                         addRowToTerminal(output.content, output.classes, output.isAnimated);
 
