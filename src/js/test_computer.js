@@ -7,9 +7,12 @@ const computer = new Computer(computerData);
 
 /*
 computer.parseCommand("ls").then(r=>{console.log(r)})*/
-computer.parseCommand("cd ..").then(r=>{console.log(r)})
-computer.parseCommand("cd tmp").then(r=>{console.log(r)})
-computer.parseCommand("pwd").then(r=>{console.log(r)})
-computer.parseCommand("ls").then(r=>{console.log(r)})
 
-computer.parseCommand("cat rt_45.dat").then(r=>{console.log(r)})
+async function test() {
+    await computer.parseCommand("cd ..");
+    await computer.parseCommand("cd root");
+}
+
+
+test()
+//computer.parseCommand("cat rt_45.dat").then(r=>{console.log(r)})

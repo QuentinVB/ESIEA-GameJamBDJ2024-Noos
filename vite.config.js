@@ -3,6 +3,7 @@
  */
 const config = {
   root: 'src',
+  publicDir:"public",
   build: {
     minify:true,
     outDir: './../dist/htdocs',

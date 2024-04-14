@@ -6,19 +6,22 @@ import '/assets/css/scrollbar.css'
 import ghostRun from "./js/ghost.js";
 import { enterFullScreen } from "./js/textdisplay.js";
 import Computer from "./js/computer.js";
-const glitchSound = new Audio("./assets/sound/electronic-glitch-98287.mp3");
-const backgroundSound = new Audio("./assets/sound/Bit Space (loopable).mp3");
+const glitchSound = new Audio("./sound/electronic-glitch-98287.mp3");
+const final = new Audio("./sound/pitch-shifted-toy-keyboard-29273.mp3");
+const backgroundSound = new Audio("./sound/Bit Space (loopable).mp3");
 backgroundSound.loop =true;
 
-const DEBUG = true;
+const DEBUG = false;
 
 const screen1 = document.getElementById("screen1");
 const screen2 = document.getElementById("screen2");
+const screen3 = document.getElementById("screen3");
 const play= document.getElementById("play");
 
 function run() {
     screen1.style.display = "block";
     screen2.style.display = "none";
+    screen3.style.display = "none";
 
     play.addEventListener("click",e=>{
         console.log("play");
@@ -27,7 +30,7 @@ function run() {
 
         console.log("loading");
         
-        Computer.LoadComputer("./assets/content/computerA.json")
+        Computer.LoadComputer("./content/computerA.json")
         .then(computer=>
         {
             glitchSound.play();
@@ -39,7 +42,7 @@ function run() {
 
     },false);
 
-    ghostRun();
+    ghostRun(backgroundSound);
 
     function playScreen2(computer)
     {
@@ -58,7 +61,7 @@ function run() {
         SOUL.EXE not found !
         Run emergency shell, type "help" for help
         
-        `, "bios", true, 50);
+        `, ["bios"], true, 50);
         
             document.addEventListener("display", e => {
                 if (e.detail.msg === "ended") {
@@ -74,5 +77,14 @@ function run() {
         }
     }
     
+    document.addEventListener("story", e => {
+        console.log(e.detail.msg);
+        if (e.detail.msg === "end") {
+            final.play();
+            screen2.style.display = "none";
+            screen3.style.display = "block";
+
+        }
+    }, false)
 }
 run(); 

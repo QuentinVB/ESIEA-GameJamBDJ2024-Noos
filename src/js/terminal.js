@@ -9,7 +9,7 @@ const promptLine = document.getElementById('prompt-line');
 const invite = document.getElementById('prompt');
 
 export function addRowToTerminal(content, classes = "", isAnimated = false, delay = 40) {
-    if (content === undefined) return;
+    if (content === undefined || content === "") return;
     const row = document.createElement("pre");
     row.classList.add("terminal-row");
     if (classes.length > 0) row.classList.add(...classes);
@@ -33,23 +33,17 @@ export function initShell(computer) {
     });
 
     inputEle.addEventListener("keypress", (e) => {
-        /*
-        if(!(document.fullScreenElement && document.fullScreenElement !== null) ||  !(document.mozFullScreen || document.webkitIsFullScreen))
-        {
-            enterFullScreen(document.documentElement);
-        }*/
-
         inputEle.size = inputEle.value.length + 1;
         if (e.keyCode == 13) {
+            if(inputEle.value ==="") return;
             addRowToTerminal(invite.textContent + inputEle.value);
             try {
                 computer.parseCommand(inputEle.value)
                     .then(output => {
-                        addRowToTerminal(output.content, output.classes, output.isAnimated);
+                        if(output.content !== "") addRowToTerminal(output.content, output.classes, output.isAnimated);
 
                         inputEle.value = "";
                         updateCaretPosition();
-                        //window.scrollTo(0, document.body.scrollTop);
                         promptLine.scrollIntoView({ behavior: "smooth",block:"center", inline: "nearest"})
                     })
 

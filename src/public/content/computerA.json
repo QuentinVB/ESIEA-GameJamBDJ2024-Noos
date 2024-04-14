@@ -1,0 +1,26 @@
+{
+  "name": "chair",
+  "filesystem": {
+    "items": {
+      "home": {
+        "items": {
+          "ice.txt": { "class": ["doc"], "event": "iceRead", "content": "InCaseofEmergency : 10/01/1996\n Si tu lis ces lignes, c'est que je suis mort\n J'espère trouver un moyen d'éviter les ennuis.\n J'ai continué mes dessins jusqu'au bout." },
+          "misato.txt": { "class": ["file", "ascii-art"], "content": "misato_ascii.txt" },
+          "misato2.txt": { "class": ["file", "ascii-art"], "content": "misato2_ascii.txt" }
+        }
+      },
+      "root": {
+        "items": {
+          "GHOST.exe": { "class": ["binary"], "content": "0101011110100101100101010101\n011111100101001010110101101\n0101010010101010100010" }
+        },
+        "password": "r0gue",
+        "locked": true
+      },
+      "tmp": {
+        "items": {
+          "rt_45.dat": { "class": ["binary"], "content": "0101011110100101100101010101\n011111100101001010110101101\n0101010010101010100010" }
+        }
+      }
+    }
+  }
+}
