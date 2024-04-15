@@ -17,5 +17,3 @@ credit ascii
 
 ## TODO
 
-gérer la barre de défilement
-scroller le shell

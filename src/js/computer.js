@@ -131,7 +131,7 @@ export default class Computer {
 
     deleteProgram(command)
     {
-        if(command != "GHOST.exe") return { content: "droit insuffisants", classes: [], isAnimated: false }
+        if(command != "ghost.exe") return { content: "droit insuffisants", classes: [], isAnimated: false }
 
         const event = new CustomEvent("userCmd", { detail: { msg: "delete" } });
         document.dispatchEvent(event);

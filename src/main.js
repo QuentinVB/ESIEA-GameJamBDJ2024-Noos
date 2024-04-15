@@ -11,7 +11,7 @@ const final = new Audio("./sound/pitch-shifted-toy-keyboard-29273.mp3");
 const backgroundSound = new Audio("./sound/Bit Space (loopable).mp3");
 backgroundSound.loop =true;
 
-const DEBUG = false;
+const DEBUG = true;
 
 const screen1 = document.getElementById("screen1");
 const screen2 = document.getElementById("screen2");
