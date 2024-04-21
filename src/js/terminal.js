@@ -36,23 +36,21 @@ export function initShell(computer) {
         inputEle.size = inputEle.value.length + 1;
         if (e.keyCode == 13) {
             if(inputEle.value ==="") return;
+            promptLine.scrollIntoView({ behavior: "smooth",block:"center", inline: "nearest"})
             addRowToTerminal(invite.textContent + inputEle.value);
             try {
                 computer.parseCommand(inputEle.value)
                     .then(output => {
                         if(output.content !== "") addRowToTerminal(output.content, output.classes, output.isAnimated);
-
-                        inputEle.value = "";
-                        updateCaretPosition();
-                        promptLine.scrollIntoView({ behavior: "smooth",block:"center", inline: "nearest"})
+                        
                     })
 
             } catch (error) {
                 console.error(error)
             }
-
+            inputEle.value = "";
+            updateCaretPosition();
         }
-
     });
 
 
@@ -62,7 +60,7 @@ export function initShell(computer) {
     const measureWidth = (text, font) => {
         context.font = font;
         const metrics = context.measureText(text);
-        return metrics.width;
+        return metrics.width ?? 0;
     };
 
     const inputStyles = window.getComputedStyle(inputEle);
@@ -71,16 +69,22 @@ export function initShell(computer) {
     const caretWidth = caretEle.getBoundingClientRect().width;
 
 
-    const updateCaretPosition = () => {
+    const updateCaretPosition = e => {
+        const caretPos = e?.target?.selectionStart ?? 0;
+
         const text = inputEle.value;
-        const textWidth = measureWidth(text, font) + paddingLeft;
+        const ratio = (caretPos/inputEle.value.length) ?? 0;
+        const textWidth = (measureWidth(text, font)*ratio) + paddingLeft;
+        //console.log(textWidth,ratio)
         const inputWidth = inputEle.getBoundingClientRect().width;
         if (textWidth + caretWidth < inputWidth) {
             caretEle.style.transform = `translate(${textWidth}px, -50%)`;
         }
     };
 
-    inputEle.addEventListener('input', updateCaretPosition);
+
+
+    inputEle.addEventListener('keyup', updateCaretPosition);
     updateCaretPosition();
     inputEle.focus();
 }

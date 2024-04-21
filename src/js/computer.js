@@ -57,9 +57,10 @@ export default class Computer {
             const folder = this.getFolderContent(path);
             if (folder.locked) {
                 this.softwareCtx = folder;
+                this.softwareCtx.folderName = newPath;
                 const event = new CustomEvent("userCmd", { detail: { msg: "accessDenied" } });
                 document.dispatchEvent(event);
-                return "ACCESS DENIED\n" + this.currentPath;
+                return "ACCESS DENIED\n" + path;
             }
 
 
@@ -110,12 +111,14 @@ export default class Computer {
         console.log(this.softwareCtx)
         if (this.softwareName === "password") {
             if (commandElements[0] === this.softwareCtx.password) {
+                
                 this.softwareCtx.locked = false;
-                this.softwareMode = false;
-                this.softwareCtx = null;
                 const event = new CustomEvent("userCmd", { detail: { msg: "accessGranted" } });
                 document.dispatchEvent(event);
+                this.changeDirectory(this.softwareCtx.folderName)
 
+                this.softwareMode = false;
+                this.softwareCtx = null;
                 return { content: "Access granted", classes: [], isAnimated: false }
             }
             else if (commandElements[0] === "quit") {

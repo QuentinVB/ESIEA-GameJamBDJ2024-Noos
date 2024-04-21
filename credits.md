@@ -14,6 +14,7 @@ https://opengameart.org/content/deep-system-computer-voice
 https://pixabay.com/fr/service/license-summary/
 
 credit ascii
+http://anime.en.utf8art.com/arc/evangelion_67.html
 
 ## TODO
 
